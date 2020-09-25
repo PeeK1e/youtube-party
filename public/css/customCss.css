@@ -1,0 +1,46 @@
+body {
+    background-color: black;
+    height: 5vh;
+    overflow: hidden;
+}
+
+#queueList{
+    background-color: #343a40;
+    height: 90vh;
+    padding: 0;
+    color: white;
+    overflow-x: hidden;
+    overflow-y: visible;
+    min-width: auto;    
+}
+
+#player{
+    padding: 5px;
+    height: 90vh;
+    
+}
+
+footer{
+    min-height: 50px;
+    min-width: 100vw;
+}
+
+footer{
+    background-color: #343a40;
+    width: 100%;
+}
+
+.qItem {
+    margin: 0;
+    padding: 4px;
+    max-height: auto;
+    max-width: 100%;
+    cursor: pointer;
+}
+
+.qTitle {
+    margin: 3px;
+    padding: 3px;
+    max-height: auto;
+    max-width: 100%;
+}

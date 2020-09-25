@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/customCss.css">
+    <!-- Needed JS -->
+    <script src="https://cdn.jsdelivr.net/npm/socket.io-client@2/dist/socket.io.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script type="module" src="./js/sockets_client.js"></script>
+    
+    <title>YT Party by PeeK1e</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg bg-dark row">
+            <div class="col-10 navbar-inner">
+                <input class="form-control mr-sm-2" type="search" placeholder="Copy an URL from the URL bar an paste it here!" aria-label="Enter URL ..." id="urlBar">
+            </div>
+            <div class="col-1 navbar-inner">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="addQ">Add to queue</button>
+            </div>
+            <div class="col-1 navbar-inner">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="github" onclick="window.location.href='https://peek1e.eu'">PeeK1e</button>
+            </div>
+        </nav>
+
+        <div class="row">
+            <!-- queue list -->
+            <div id="queueList" class="col-1">
+                <div class="qTitle">Queue</div>
+                <div id="qItems">
+                    <!-- Queue Items get Inserted here -->
+                </div>
+            </div>
+            <!-- video player -->
+            <div id="player" class="col-11">
+                <script>
+                    var player;
+                    function onYouTubeIframeAPIReady() {
+                        player = new YT.Player('player');
+                    }
+                </script>
+
+            </div>
+
+        </div>
+        <footer class="row">
+            <div class="col-0 col-m-12"/>
+        </footer>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
