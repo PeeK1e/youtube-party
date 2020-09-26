@@ -15,8 +15,7 @@ watch2.on('connection', socket => {
     var nickname;
     var queueList = [];
 
-    //called on connect or room change
-    //changes the values for room and name
+    //changes the values for room and name (names are not implemented yet)
     socket.on('joinRoom', (data) => {
         room = data[0];
         nickname = data[1];
@@ -57,8 +56,8 @@ watch2.on('connection', socket => {
         socket.to(room).emit('goToTime', data);
     });
 
-    // is called when a client connects new to the room
-    //it checks if the client is alone in the room or if he can ask one of the o                                                                                                                                                             ther clients for an queue list
+    //is called when a client connects new to an existing room
+    //it checks if the client is alone in the room or if he can ask one of the other clients for an queue list
     socket.on('sync', (data) => {
         if (data == "0") {
             console.log("getting number of clients for room" + room);
