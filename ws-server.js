@@ -20,7 +20,7 @@ watch2.on('connection', socket => {
     socket.on('joinRoom', (data) => {
         room = data[0];
         nickname = data[1];
-        socket.leave(room);
+        console.log("joining room: " + room + " as " + nickname);
         socket.join(room);
     });
 
@@ -58,18 +58,21 @@ watch2.on('connection', socket => {
     });
 
     // is called when a client connects new to the room
-    //it checks if the client is alone in the room or if he can ask one of the other clients for an queue list
+    //it checks if the client is alone in the room or if he can ask one of the o                                                                                                                                                             ther clients for an queue list
     socket.on('sync', (data) => {
         if (data == "0") {
-            var lgt = io.nsps['/'].adapter.rooms[room].length;
-            if (lgt > 1) {
+            console.log("getting number of clients for room" + room);
+            var lgt = io.nsps['/'].adapter.rooms[room];
+            console.log(lgt.length);
+            if (lgt.length > 1) {
                 socket.to(room).emit('sync', 0);
             } else {
                 console.log("self req.");
-                socket.to(room).emit('syncAnswer', [data["0"], data["1"], [] = queueList]);
+                socket.to(room).emit('syncAnswer', [data["0"], data["1"], [] = q                                                                                                                                                             ueueList]);
             }
         } else {
-            socket.to(room).emit('syncAnswer', [data["0"], data["1"], [] = queueList]);
+            console.log("sending list: " + queueList);
+            socket.to(room).emit('syncAnswer', [data["0"], data["1"], [] = queue                                                                                                                                                             List]);
         }
     });
 
