@@ -1,6 +1,6 @@
 (function () {
     //local client info
-    var myRoom;
+    var myRoom = "open";
     var requestedSync = false;
 
     //elements
@@ -13,10 +13,15 @@
         var paramList = new URLSearchParams(location.search);
         myRoom = paramList.get('room');
         player.addEventListener('onReady', function () {
+            syncWithRoom();
             requestedSync = true;
             //parameter 0 means "I requested the List"
             socket.emit('sync', 0);
         });
+        player.addEventListener('onStateChange', playerUpdatedState);
+        //calling this funtion every 1 secon to update the time on all clients
+        setInterval(updateSeekTime, 1000);
+        //console.log(myRoom);
     }
 
     //add event listeners
@@ -31,7 +36,7 @@
     });
 
     //connects to Websocket service
-    var socket = io('http://localhost:3000');
+    var socket = io('http://watch.peek1e.eu:3000');
 
 
     //update the room information on connection to socket.io
@@ -112,7 +117,6 @@
                 socket.emit('next', 0);
                 break;
             default:
-                socket.emit('goToTime', player.getCurrentTime());
                 break;
         }
     }
@@ -123,24 +127,36 @@
             if (data[0] != null) {
                 $('#player').show();
                 player.loadVideoById(data[0], 0);
-                player.playVideo();
-                player.seekTo(data[1]);
-            }
-
+//              ytplayer.getDuration();
+//              player.seekTo(0, true);
+                player.seekTo(data[1], true);
+           }
+            console.log("got list: " + data[2]);
             socket.emit('getList', data[2]);
             data[2].forEach(element => {
                 addToQueue(element);
             });
-            player.addEventListener('onStateChange', playerUpdatedState);
         }
     }
 
-    //socket listeners
-    socket.on('connect', syncWithRoom);
 
+    //function because youtubes API cant hadle skips
+    var oldTime = 0;
+    function updateSeekTime(){
+        var currTime = player.getCurrentTime();
+        //console.log(oldTime + "<- old new ->" + currTime);
+        if(oldTime+5 < currTime || currTime < oldTime-5){
+        //      console.log("called update");
+                socket.emit('goToTime', player.getCurrentTime());
+        }
+        oldTime=currTime
+    }
+
+    //socket listeners
     socket.on('playVideo', (data) => {
         $('#player').show();
         startVideoById(data);
+        oldTime = 0;
     });
 
     socket.on('addToQueue', (data) => {
@@ -165,7 +181,8 @@
 
     socket.on('goToTime', (data) => {
         player.seekTo(data);
-    })
+        oldTime=data;
+    });
 
     socket.on('sync', (data) => {
         //on sync request tell server to send my list
