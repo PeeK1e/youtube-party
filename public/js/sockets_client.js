@@ -36,7 +36,8 @@
     });
 
     //connects to Websocket service
-    var socket = io('http://watch.peek1e.eu:3000');
+    // ENTER YOUR SOCKET ULR HERE
+    var socket = io('http://localhost:3000');
 
 
     //update the room information on connection to socket.io
