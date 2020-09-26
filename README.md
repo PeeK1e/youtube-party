@@ -6,3 +6,5 @@ The necessary files for the webserver are in "/public" written in HTML and JS.
 The WS-Server is written with Nodejs.
 
 A Live Demo can be found at http://watch.peek1e.eu
+
+The App is not optimized for HTTPS! Its working well for http requests, a Rasperry PI 3 is apparently too slow for https requests.
