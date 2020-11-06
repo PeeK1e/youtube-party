@@ -12,3 +12,5 @@ On my Demo-Sever you also an create a own room under http://watch.peek1e.eu/r/YO
 Running the server locally you can create rooms with this URL: http://localhost/index.html?room=YOUR-ROOM-NAME
 
 The App is not optimized for HTTPS! Its working well for http requests, a Rasperry PI 3 is apparently too slow for https requests.
+
+The license and source code from sockets.io can be found here: https://github.com/socketio/socket.io
